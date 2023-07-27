@@ -27,7 +27,7 @@ func Init() {
 
 	// register all endpoint
 	apiGroup := app.Group("api/")
-	apiGroup.Use(middlerwares.Cors)
+	apiGroup.Use(middlerwares.Cors())
 	endpoints.Init(apiGroup)
 
 	// Init not found handler

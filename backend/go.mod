@@ -2,16 +2,19 @@ module backend
 
 go 1.20
 
-require go.mongodb.org/mongo-driver v1.12.0
+require (
+	github.com/gofiber/fiber/v2 v2.48.0
+	github.com/kamva/mgm/v3 v3.5.0
+	github.com/sirupsen/logrus v1.9.3
+	go.mongodb.org/mongo-driver v1.12.0
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/gofiber/fiber/v2 v2.48.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/kamva/mgm/v3 v3.5.0 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
@@ -19,7 +22,6 @@ require (
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.48.0 // indirect
