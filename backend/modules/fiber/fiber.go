@@ -4,7 +4,6 @@ import (
 	"backend/endpoints"
 	"backend/modules/config"
 	"backend/modules/fiber/middlerwares"
-	"backend/types/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 	"time"
@@ -21,14 +20,11 @@ func Init() {
 	})
 
 	// register root endpoint
-	app.All("/", func(ctx *fiber.Ctx) error {
-		return ctx.JSON(response.Info("SHORT_LINK_ROOT"))
-	})
+	app.Static("/", "./static")
 
 	// register all endpoint
-	apiGroup := app.Group("api/")
-	apiGroup.Use(middlerwares.Cors())
-	endpoints.Init(apiGroup)
+	app.Use(middlerwares.Cors())
+	endpoints.Init(app)
 
 	// Init not found handler
 	app.Use(NotFoundHandler)
