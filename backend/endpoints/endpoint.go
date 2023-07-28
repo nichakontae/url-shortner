@@ -1,11 +1,11 @@
 package endpoints
 
 import (
-	"backend/endpoints/create"
+	"backend/endpoints/shorturl"
 	"github.com/gofiber/fiber/v2"
 )
 
 func Init(router fiber.Router) {
-	createGroup := router.Group("create")
-	createGroup.Post("/short", create.Test)
+	router.Post("/shorten", shorturl.GenerateShortLink)
+	router.Get("/:shortURL", shorturl.GetShortURL)
 }
