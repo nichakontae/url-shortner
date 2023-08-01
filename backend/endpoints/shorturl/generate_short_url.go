@@ -17,6 +17,10 @@ func GenerateShortLink(c *fiber.Ctx) error {
 		return response.Error(false, "Unable to parse body", err)
 	}
 
+	if *body.Url == "" {
+		return response.Error(false, "Please enter long url")
+	}
+
 	// filter original url
 	filter := bson.M{
 		"original_link": body.Url,
