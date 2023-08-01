@@ -7,7 +7,7 @@ const Header = () => {
       <Typography
         fontWeight={900}
         variant="h3"
-        color={theme.palette.primary.main}
+        color={theme.palette.text[200]}
       >
         Shorten URL
       </Typography>

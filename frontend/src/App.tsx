@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useMemo, useEffect } from "react";
 import { getDesignTokens } from "./theme/theme";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -18,8 +19,10 @@ function App() {
   }, [mode]);
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <MainPage />
+      <SnackbarProvider maxSnack={3}>
+        <CssBaseline />
+        <MainPage />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

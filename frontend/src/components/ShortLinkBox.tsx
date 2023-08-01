@@ -1,4 +1,12 @@
-import { Box, Grid, Typography, IconButton, useTheme } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+  alpha,
+} from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { FC } from "react";
 
@@ -9,12 +17,13 @@ interface ShortLinkBoxProps {
 
 const ShortLinkBox: FC<ShortLinkBoxProps> = ({ handleCopy, shortURL }) => {
   const theme = useTheme();
+  const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
-      bgcolor={theme.palette.background[200]}
       padding={"0.5rem 1.5rem"}
-      width={"69%"}
+      width={isExtraSmallScreen ? "100%" : "69%"}
       borderRadius={"0.5rem"}
+      sx={{ backgroundColor: alpha(`${theme.palette.background[200]}`, 0.7) }}
     >
       <Grid container direction={"row"} alignItems={"center"}>
         <Grid item xs={11}>
@@ -28,7 +37,7 @@ const ShortLinkBox: FC<ShortLinkBoxProps> = ({ handleCopy, shortURL }) => {
         </Grid>
         <Grid item xs={1}>
           <IconButton
-            onClick={handleCopy()}
+            onClick={() => handleCopy()}
             sx={{ display: "flex", flex: "1", color: theme.palette.text.main }}
           >
             <ContentCopyIcon />

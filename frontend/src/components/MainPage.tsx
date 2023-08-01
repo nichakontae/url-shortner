@@ -2,59 +2,53 @@ import {
   Container,
   Stack,
   Box,
-  Snackbar,
   useTheme,
-  Typography,
   alpha,
+  useMediaQuery,
 } from "@mui/material";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import API from "../function/API";
 import Header from "./Header";
 import ShortLinkBox from "./ShortLinkBox";
 import CustomButton from "./CustomButton";
-import { Link } from "react-router-dom";
+import By from "./By";
+import { VariantType, useSnackbar } from "notistack";
 
 const MainPage = () => {
   const [url, setURL] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [shortURL, setShortURL] = useState("");
-  const [open, setOpen] = useState(false);
   const theme = useTheme();
+  const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const { enqueueSnackbar } = useSnackbar();
 
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    console.log(event);
-    setOpen(false);
+  const handleClickVariant = (variant: VariantType, message: string) => () => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar(message, { variant });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("before");
       const response = await API.post<ResponseInfo>("/shorten", {
         url: url,
       });
+      handleClickVariant("success", "Create ShortURL successfully!")();
       setShortURL(response.data.data.short_url);
     } catch (e) {
-      setErrorMessage("cannot create shortURL, try again");
-      setOpen(true);
+      handleClickVariant("error", "Cannot create shortURL, try again")();
     }
   };
 
   const handleCopy = () => {
     if (shortURL) {
-      setErrorMessage("Copied!");
-      setOpen(true);
-      navigator.clipboard.writeText(
-        `${import.meta.env.VITE_BACKEND_URL}/${shortURL}`
-      );
+      navigator.clipboard
+        .writeText(`${import.meta.env.VITE_BACKEND_URL}/${shortURL}`)
+        .then(() => {
+          handleClickVariant("success", "Copied")();
+        });
     }
   };
+
   return (
     <Box
       width={"100vw"}
@@ -83,7 +77,7 @@ const MainPage = () => {
               }}
             >
               <Box
-                width={"60%"}
+                width={isExtraSmallScreen ? "100%" : "60%"}
                 border={"1px solid black"}
                 sx={{
                   borderRadius: "0.5rem 0rem 0rem 0.5rem",
@@ -110,24 +104,8 @@ const MainPage = () => {
           {shortURL && (
             <ShortLinkBox handleCopy={handleCopy} shortURL={shortURL} />
           )}
-          <Typography>
-            By{" "}
-            <a
-              href="https://www.ivelse.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none", color: theme.palette.text.main }}
-            >
-              ivelse.com
-            </a>
-          </Typography>
+          <By />
         </Stack>
-        <Snackbar
-          open={open}
-          autoHideDuration={3000}
-          onClose={handleClose}
-          message={errorMessage}
-        />
       </Container>
     </Box>
   );
