@@ -1,71 +1,26 @@
-import { Button, Snackbar, Stack, TextField, Typography } from "@mui/material";
-import { FormEvent, useState } from "react";
-import API from "./function/API";
+import "./style/app.css";
+import MainPage from "./components/MainPage";
+import {
+  useMediaQuery,
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
+} from "@mui/material";
+import { useMemo, useEffect } from "react";
+import { getDesignTokens } from "./theme/theme";
 
 function App() {
-  const [url, setURL] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [shortURL, setShortURL] = useState("");
-  const [open, setOpen] = useState(false);
-
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      console.log("before");
-      const response = await API.post<ResponseInfo>("/shorten", {
-        url: url,
-      });
-      setShortURL(response.data.data.short_url);
-    } catch (e) {
-      setErrorMessage("cannot create shortURL, try again");
-      setOpen(true);
-    }
-  };
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const mode = prefersDarkMode ? "dark" : "light";
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", mode);
+  }, [mode]);
   return (
-    <>
-      <Stack justifyContent={"center"} alignItems={"center"}>
-        <Typography fontWeight={900} variant="h3">
-          Shorten URL
-        </Typography>
-        <Stack direction={"row"}>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="URL"
-              variant="outlined"
-              onChange={(e) => setURL(e.target.value)}
-            />
-            <Button variant="contained" type="submit">
-              Shorten
-            </Button>
-          </form>
-        </Stack>
-      </Stack>
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={errorMessage}
-      />
-      {shortURL && (
-        <Typography>
-          ShortURL:{" "}
-          <a href={`${import.meta.env.VITE_BACKEND_URL}/${shortURL}`}>{`${
-            import.meta.env.VITE_BACKEND_URL
-          }/${shortURL}`}</a>
-        </Typography>
-      )}
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <MainPage />
+    </ThemeProvider>
   );
 }
 

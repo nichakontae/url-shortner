@@ -417,7 +417,7 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@mui/base@5.0.0-beta.8":
+"@mui/base@^5.0.0-beta.8", "@mui/base@5.0.0-beta.8":
   "integrity" "sha512-b4vVjMZx5KzzEMf4arXKoeV5ZegAMOoPwoy1vfUBwhvXc2QtaaAyBp50U7OA2L06Leubc1A+lEp3eqwZoFn87g=="
   "resolved" "https://registry.npmjs.org/@mui/base/-/base-5.0.0-beta.8.tgz"
   "version" "5.0.0-beta.8"
@@ -436,7 +436,14 @@
   "resolved" "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.14.2.tgz"
   "version" "5.14.2"
 
-"@mui/material@^5.14.2":
+"@mui/icons-material@^5.14.1":
+  "integrity" "sha512-xV/f26muQqtWzerzOIdGPrXoxp/OKaE2G2Wp9gnmG47mHua5Slup/tMc3fA4ZYUreGGrK6+tT81TEvt1Wsng8Q=="
+  "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.14.1.tgz"
+  "version" "5.14.1"
+  dependencies:
+    "@babel/runtime" "^7.22.6"
+
+"@mui/material@^5.0.0", "@mui/material@^5.14.2":
   "integrity" "sha512-TgNR4/YRL11RifsnMWNhITNCkGJYVz20SCvVJBBoU5Y/KhUNSSJxjDpEB8VrnY+sUsV0NigLCkHZJglfsiS3Pw=="
   "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.14.2.tgz"
   "version" "5.14.2"
@@ -528,6 +535,11 @@
   "integrity" "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A=="
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
   "version" "2.11.8"
+
+"@remix-run/router@1.7.2":
+  "integrity" "sha512-7Lcn7IqGMV+vizMPoEl5F0XDshcdDYtMI6uJLQdQz5CfZAwy3vvGKYSUk789qndt5dEC4HfSjviSYlSoHGL2+A=="
+  "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.7.2.tgz"
+  "version" "1.7.2"
 
 "@types/json-schema@^7.0.9":
   "integrity" "sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA=="
@@ -1615,7 +1627,7 @@
   "resolved" "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   "version" "1.2.3"
 
-"react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16.6.0":
+"react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -1643,6 +1655,21 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
   "version" "0.14.0"
 
+"react-router-dom@^6.14.2":
+  "integrity" "sha512-5pWX0jdKR48XFZBuJqHosX3AAHjRAzygouMTyimnBPOLdY3WjzUSKhus2FVMihUFWzeLebDgr4r8UeQFAct7Bg=="
+  "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.14.2.tgz"
+  "version" "6.14.2"
+  dependencies:
+    "@remix-run/router" "1.7.2"
+    "react-router" "6.14.2"
+
+"react-router@6.14.2":
+  "integrity" "sha512-09Zss2dE2z+T1D03IheqAFtK4UzQyX8nFPWx6jkwdYzGLXd5ie06A6ezS2fO6zJfEb/SpG6UocN2O1hfD+2urQ=="
+  "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.14.2.tgz"
+  "version" "6.14.2"
+  dependencies:
+    "@remix-run/router" "1.7.2"
+
 "react-transition-group@^4.4.5":
   "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"
@@ -1653,7 +1680,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16.6.0", "react@>=16.8.0":
+"react@^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
