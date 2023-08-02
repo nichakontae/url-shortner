@@ -1,8 +1,8 @@
 package config
 
 import (
-	"encoding/json"
-	"log"
+	"github.com/sirupsen/logrus"
+	"gopkg.in/yaml.v3"
 	"os"
 )
 
@@ -12,12 +12,12 @@ func Init() {
 	// read config.yaml file
 	yml, err := os.ReadFile("config.yaml")
 	if err != nil {
-		log.Fatal("UNABLE TO READ config.yaml FILE")
+		logrus.Fatal("UNABLE TO READ CONFIGURATION FILE")
 	}
 
 	// parse yaml file to Go struct
-	if err := json.Unmarshal(yml, C); err != nil {
-		log.Fatal("UNABLE TO PARSE config.yaml")
+	if err := yaml.Unmarshal(yml, C); err != nil {
+		logrus.Fatal("UNABLE TO PARSE CONFIGURATION FILE")
 	}
 
 }

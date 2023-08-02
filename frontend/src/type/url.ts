@@ -1,0 +1,3 @@
+type GenerateShortURL = {
+  url: string;
+};
